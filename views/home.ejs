@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple BLog</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!-- editing a blog after its creation -->
+<h1>MY Blog</h1>
+<h2>Posts</h2>
+<ul>
+    <% posts.forEach(function(post) { %>
+        <li>
+            <h3><%= post.title %></h3>
+            <p><%= post.content %></p>
+            <form action="/edit" method="POST" style="margin-bottom: 10px;">
+                <input type="hidden" name="id" value="<%= post.id %>">
+                <input type="text" name="title" value="<%= post.title %>" required>
+                <textarea name="content" required><%= post.content %></textarea>
+                <button type="submit">Edit</button>
+            </form>
+            <form action="/delete" method="POST" style="display:inline;">
+                <input type="hidden" name="id" value="<%= post.id %>">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    <% }); %> 
+</ul>
+
+
+
+
+
+<!-- creating a blog -->
+
+<h1>New blog</h1>
+<form action="/create" method="post">
+    <input type="text" name="title" required>
+    <textarea name="content" required></textarea>
+    <button type="submit">Create</button>
+</form>
+    
+</body>
+</html>
